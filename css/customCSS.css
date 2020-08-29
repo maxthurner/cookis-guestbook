@@ -1,0 +1,88 @@
+/*!
+ * Start Bootstrap - Scrolling Nav (https://startbootstrap.com/template-overviews/scrolling-nav)
+ * Copyright 2013-2019 Start Bootstrap
+ * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-scrolling-nav/blob/master/LICENSE)
+ */
+
+@font-face {
+  font-family: BerlinCustom;
+  src: url('./BRLNSR.TTF');
+}
+
+header {
+  /*background-image: url('./img/Background.jpg');*/
+  padding: 156px 0 100px;
+}
+
+.usernameInput, .userEmailInput{
+  margin-left: 10%;
+  margin-top: 10px;
+}
+
+.userEmailInput{
+  width: 300px;
+}
+
+.inputDescription{
+  float: left; 
+  width: 75px;
+  margin-top: 10px;
+}
+
+.inputField{
+  width: 100%;
+  margin-left: 0%;
+}
+
+.userInput{
+  padding: 5px;
+  margin-bottom: 5px;
+  border-style: groove;
+  border-width: 1px;
+}
+
+.inputForm{
+  width: 100%;
+  margin-left: 20%;
+  margin-top: -20px;
+}
+
+.sendBtn{
+  background-color: #4A4A4A;
+  border: none;
+  color: white;
+  padding: 10px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin-left: 20%;
+}
+
+.sendBtn:hover{
+  background-color: #BEBEBE;
+}
+
+@media (min-width: 850px){
+  body{
+    background-image: none;
+  }
+}
+
+@media (max-width: 850px) {
+  body{
+    background-image: none;
+  }
+}
+
+
+
+/*.testclass{
+  background-image: url('./img/Background_4.jpg');
+}*/
+
+
+section {
+  padding: 100px 0;
+
+}
