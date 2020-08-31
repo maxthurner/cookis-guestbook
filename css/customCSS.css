@@ -9,16 +9,67 @@
   src: url('./BRLNSR.TTF');
 }
 
-.loginField{
-  margin-left: 30%;
+body{
+  width: 100%;
+  color: black;
+  background-color: white;
+}
+
+@media (min-width: 850px){
+  body{
+    background-image: none;
+  }
+}
+@media (max-width: 850px) {
+  body{
+    background-image: none;
+  }
 }
 
 header {
   /*background-image: url('./img/Background.jpg');*/
-  padding: 156px 0 0px;
+  margin-top: 100px;
+  
+}
+section {
+  padding: 100px 0;
 }
 
+/*TEST*/
+.zfix{
+  margin-top: 20px;
+  display: block;
+  position: sticky;
+  
+}
+/*
+.Itemlist{
+  background-color: #d6d6d6;
+}*/
 
+#particles-js{
+  /*background: #262626;*/
+  background: #4f4f4f;
+  width: 100%;
+  height: 300px;
+  position: absolute;
+  margin-top: -75px;
+
+  background-size: cover; 
+  background-repeat: repeat; 
+  background-position: 50% 50%;
+}
+
+/**/
+
+
+
+
+
+
+.table{
+  color:black;
+}
 /**/
 .inputField{
   width: 450px;
@@ -68,20 +119,6 @@ header {
 }
 /**/
 
-.LoginInputField{
-  width: 50%;
-  margin: 0 auto;
-}
-@media (max-width: 500px){
-  .LoginInputField{
-    width: 100%;
-  }
-}
-
-.LoginForm{
-  width: 50%;
-  margin: 0 auto;
-}
 
 .sendBtn{
   background-color: #4A4A4A;
@@ -114,25 +151,24 @@ header {
   background-color: #990909;
 }
 
-body{
-  width: 100%;
+
+
+/* LOGIN */
+.loginField{
+  margin-left: 30%;
 }
 
-@media (min-width: 850px){
-  body{
-    background-image: none;
+.LoginInputField{
+  width: 50%;
+  margin: 0 auto;
+}
+@media (max-width: 500px){
+  .LoginInputField{
+    width: 100%;
   }
 }
-
-@media (max-width: 850px) {
-  body{
-    background-image: none;
-  }
+.LoginForm{
+  width: 50%;
+  margin: 0 auto;
 }
-
-
-
-section {
-  padding: 100px 0;
-
-}
+/**/

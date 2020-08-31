@@ -25,125 +25,153 @@
   <!-- CKEditor -->
   <script src="ckeditor/ckeditor.js"></script>
 
+  
+
   <script>
     //Constants for Developing State --> replace when deploy!
     const URLselectEntries = "/index/Guestbook/selectEntries.php";
     const URLlike = "like.php";
-
   </script>
 </head>
 
 
 <body id="page-top">
-  <!-- Navigation -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-    <div class="container">
-      
-      <a class="navbar-brand js-scroll-trigger" href="#page-top" style="font-family: BerlinCustom;">GUESTBOOK</a>
-      <!-- Here the logout button could be added when Session is active and User logged in - but it's not necessary for example -->
-    </div>
-  </nav>
-
-  <header class="bg-primary">
-    <div class="container text-center">
-      <h1 style="color: black; font-family: BerlinCustom; font-size: 50px;">THE GUESTBOOK</h1>
-      <p class="lead" style="font-size: 25px;">Write something worth reading</p>
-      <p></p>
-    </div>
-  </header>
-
-  <section id="nav1">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-8 mx-auto">
-          <div class="headlineLine"></div>
-          <h2 class="headlineText" style="color: black">Entities</h2>
-          
-          <div id="Itemlist">
-            <table class="table">
-                <tr v-for="(item, index) in items">
-                    <!--<td>{{index}}</td>-->
-                    <td>{{item.username}}
-                        <div>{{item.timestamp.slice(0,11)}}</div>
-                    </td>
-                    <td>
-                      <span v-html="superscript(item.message)"></span>
-                      <!--{{item.message}}-->
-                    </td>
-                    <!-- Surely there is a more beautiful way to solve this but I don't have that much experience with Vue to think of a clean way 
-                         I hide the Comment ID and use this in JS to indentify the clicked button to the entity object.
-                         I would be interested in how to solve this cleanly, please lmk! -->
-                    
-                    <td style="padding: 12px 0 0 0;">
-                        <div id="likeBtn" onclick="like(this, 1)" style='font-size: larger; cursor: pointer;'>&#128077;<p style="display:none;">{{item.id}}</p></div>
-                    </td>
-                    <td style="padding: 2px;">
-                        <div style="font-weight: bold; margin-top: 35px;">{{item.likes}}</div>
-                    </td>
-                    <td style="padding: 12px 0 0 0;"> 
-                        <div id="dislikeBtn" onclick="like(this, 0)" style='font-size: larger; cursor: pointer;'>&#128078;<p style="display:none;">{{item.id}}</p></div>
-                    </td>
-                    
-                    
-                </tr>
-            </table>
-          </div>
-
-          <br><br><br>
-          <div>
-            <h3 style="color: black;">New Entry:</h3>
-          </div>
-          <div class="inputFieldWrapper">
-            <form name="formUserInput" action="newEntry.php" onsubmit="return validateForm()" method="post">
-
-              <div class="inputDescription1">Username</div>
-              <div class="userInput">
-                <input id="fieldUsername" class="inputField" type="text" name="username"></input>
-              </div>
-
-              <div class="inputDescription1">Email</div>
-              <div class="userInput">
-                <input id="fieldEmail" class="inputField" type="email" name="email"></input>
-              </div>
-
-              <div class="inputDescription1">Message *</div>
-              <div class="userInput">
-                <textarea id="inputForm" class="inputTextarea"  placeholder="New Entry" name="message"></textarea>
-              </div>
-
-              <!-- Alert Message -->
-              <div id="noMessage" style="display: none; background-color: #ff3333; color: white; border: 1px solid black; border-radius: 10px; margin-bottom: 10px;">
-                <p style="text-align: center; margin-top: 10px;">Message length must be &gt;0 and &lt;512! (no faculty)</p>
-              </div>
-
-              <div class="inputDescription1" style="border:none;">&nbsp;</div>
-              <div class="userInput">
-                <button id="sendBtn" alt="Submit" class="sendBtn">Send</button>
-              </div>
-              
-              
-            </form>
+  
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+      <div class="container">
+        <a class="navbar-brand js-scroll-trigger" href="#page-top" style="font-family: BerlinCustom;">GUESTBOOK</a>
+        <!-- Here the logout button could be added when Session is active and User logged in - but it's not necessary for example -->
       </div>
-    </div>
-
-  </section>
-
-  <!-- Footer -->
-  <footer class="py-5 bg-dark">
-    <div class="container">
-        <p class="m-0 text-center"><a  href="admin.php">Backend login</a></p>
-        <p class="m-0 text-center text-white">Copyright &copy; Thurner</p>
+    </nav>
+    <!--<div id="particles-js" class="particles-js"></div>-->
+  
+    <header class="bg-primary">
+    
+      <div id="particles-js" class="particles-js">
+      </div>
+      <div class="container text-center" style="display: block;">
+        <h1 class="zfix" style="font-family: BerlinCustom; font-size: 50px;">THE GUESTBOOK</h1>
+        <p class="lead zfix" style="font-size: 25px; color: white;">Write something worth reading</p>
+      </div> 
       
-    </div>
-  </footer>
+    </header>
+  
+      <section id="nav1">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-8 mx-auto" style="margin-top: 50px;">
+              <div class="headlineLine"></div>
+              <h2 class="headlineText" style="color: black;">All Posts</h2>
+              <div id="noItems" style="display: none; text-align: center;">No Posts available yet</div>
+              <div id="Itemlist" class="Itemlist">
+                <table class="table" id="tableID">
+                    <tr v-for="(item, index) in items">
+                        <!--<td>{{index}}</td>-->
+                        <td><b>{{item.username}}</b>
+                            <div>{{item.timestamp.slice(0,11)}}</div>
+                        </td>
+                        <td>
+                          <span v-html="superscript(item.message)"></span>
+                          <!--{{item.message}}-->
+                        </td>
+                        <!-- Surely there is a more beautiful way to solve this but I don't have that much experience with Vue to think of a clean way 
+                            I hide the Comment ID and use this in JS to indentify the clicked button to the entity object.
+                            I would be interested in how to solve this cleanly, please lmk! -->
+                        
+                        <td style="width: 100px;">
+                          <div style="overflow: hidden; width: 75px;">
+                            <div style="float:left; width: 25px; text-align: center; cursor: pointer; font-size: larger;" onclick="like(this, 1)">&#128077;<p style="display:none;">{{item.id}}</p></div>
+                            <div style="float:left; width: 25px; text-align: center; margin-top: 4px;" >{{item.likes}}</div>
+                            <div style="float:left; width: 25px; text-align: center; cursor: pointer; font-size: larger;" onclick="like(this, 0)">&#128078;<p style="display:none;">{{item.id}}</p></div>
 
-  <!-- Bootstrap core JavaScript -->
-  <script src="vendor/jquery/jquery.min.js"></script>
-  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!--
+                            <div id="likeBtn" onclick="like(this, 1)" 
+                            style='width: 25px; font-size: larger; cursor: pointer; text-align: right;'>&#128077;<p style="display:none;">{{item.id}}</p></div>
+                            <div 
+                            style="width: 25px; float:left;  font-weight: bold; margin-top: 35px; margin-right: -5px;">{{item.likes}}</div>
+                            <div id="dislikeBtn" onclick="like(this, 0)" 
+                            style='width: 25px; float:left; margin-left: 10px; font-size: larger; cursor: pointer; text-align: left;'>&#128078;<p style="display:none;">{{item.id}}</p></div>
+                          -->
+                          </div>
+                        </td>
+                        
+                        <!--
+                        <td style="padding: 12px 0 0 0; width: 15px;">
+                            <div id="likeBtn" onclick="like(this, 1)" style='font-size: larger; cursor: pointer; text-align: right;'>&#128077;<p style="display:none;">{{item.id}}</p></div>
+                        </td>
+                        <td style="padding: 0px; margin: 0px;">
+                            <div style="font-weight: bold; margin-top: 35px; margin-right: -5px;">{{item.likes}}</div>
+                        </td>
+                        <td style="padding: 12px 0 0 0;width: 15px;"> 
+                            <div id="dislikeBtn" onclick="like(this, 0)" style='font-size: larger; cursor: pointer; text-align: left;'>&#128078;<p style="display:none;">{{item.id}}</p></div>
+                        </td>-->
+                        
+                        
+                    </tr>
+                </table>
+              </div>
 
-  <!-- Plugin JavaScript -->
-  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+              <br><br><br>
+              <div>
+                <h3 style="color: black;">New Entry:</h3>
+              </div>
+              <div class="inputFieldWrapper">
+                <form name="formUserInput" action="newEntry.php" onsubmit="return validateForm()" method="post">
+
+                  <div class="inputDescription1">Username</div>
+                  <div class="userInput">
+                    <input id="fieldUsername" class="inputField" type="text" name="username"></input>
+                  </div>
+
+                  <div class="inputDescription1">Email</div>
+                  <div class="userInput">
+                    <input id="fieldEmail" class="inputField" type="email" name="email"></input>
+                  </div>
+
+                  <div class="inputDescription1">Message *</div>
+                  <div class="userInput">
+                    <textarea id="inputForm" class="inputTextarea"  placeholder="New Entry" name="message"></textarea>
+                  </div>
+
+                  <!-- Alert Message -->
+                  <div id="noMessage" style="display: none; background-color: #ff3333; color: white; border: 1px solid black; border-radius: 10px; margin-bottom: 10px;">
+                    <p style="text-align: center; margin-top: 10px;">Message length must be &gt;0 and &lt;512! (no faculty)</p>
+                  </div>
+
+                  <div class="inputDescription1" style="border:none;">&nbsp;</div>
+                  <div class="userInput">
+                    <button id="sendBtn" alt="Submit" class="sendBtn">Send</button>
+                  </div>
+                </form>
+              </div>
+          </div>
+        </div>
+      </section>
+    
+   
+    <!-- Footer -->
+    <footer class="py-5 bg-dark">
+      <div class="container">
+          <p class="m-0 text-center"><a  href="admin.php">Backend login</a></p>
+          <p class="m-0 text-center text-white">Copyright &copy; Thurner</p>
+        
+      </div>
+    </footer>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
 </body>
+
+
+<!-- particles.js-->
+<script type="text/JavaScript" src="particles.js"></script>
+<script type="text/JavaScript" src="app.js"></script>
+<!-- Navigation -->
 
 <script>
   //Add CKEditor
@@ -209,11 +237,19 @@
             method: 'GET',
             success: function (data) {
                 self.items = data;
+
+                if(data.length == 0){
+                  var noItem = document.getElementById("noItems");
+                  noItem.style.display = "block";
+                }
             },
             error: function (error) {
                 console.log(error);
             }
         });
+        var test = document.getElementById("tableID");
+ 
+        
     }
   });
 </script>

@@ -1,4 +1,4 @@
-# [Cookis - Guestbook]
+# Cookis' - Guestbook
 
 
 ## Status
@@ -19,8 +19,8 @@ The architecture is structured as following:
 
     WYSIWYG Texteditor: CKEditor Basic
 
-* Data Access Points: selectEntries.php , newEntry.php
-    All database access is performed over those two files.
+* Data Access Services: selectEntries.php , newEntry.php, delete.php, like.php
+    
 
 * Backend Access:   login.php, admin.php
     
@@ -34,10 +34,10 @@ The architecture is structured as following:
     Therefore selected data from the database was brought into JSON format after recieving it.
 
     Database Architecture:
-        Table   articles    includes    ID[Serial, PK], Username[varchar(64), !NULL], Email[varchar(64) ], Message[text ], Timestamp[timestamp, current_timestamp()], Likes[int ]
-                user        includes    ID[Serial, PK], Username[varchar(255) ], Password[varchar(255) ]
+        Table   articles    includes    ID[Serial, PK], Username[varchar(64)], Email[varchar(64)], Message[text,!Null], Timestamp[timestamp, current_timestamp()], Likes[int]
+                user        includes    ID[Serial, PK], Username[varchar(255)], Password[varchar(255)]
 
-    Improvements (Security) to make:
+    Improvements (Security) to do:
         * Don't store plaintext database credentials
         * Split user and rights even more (Readonly user)
 
@@ -48,7 +48,7 @@ The architecture is structured as following:
                 pwd: EUDqKAf20uqOr4Sc
 
 
-## Things to improve
+## Things to improve / Bugs
 
 * Page View List Objects
     if more than x posts are returned -> multipage view of comments, so it doesn't end in an endless scrolling party
@@ -56,3 +56,5 @@ The architecture is structured as following:
 
 * Non User authentication
     find if user (device/used browser) has already liked a post (simple cookie with IDs of liked posts)
+
+* Nr. of Likes --> Doesn't fit too large numbers -> 4 digits don't fit.
