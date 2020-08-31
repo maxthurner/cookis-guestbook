@@ -15,7 +15,7 @@ This project was developed by using Xampp as an local Webserver and Database hos
 
 The architecture is structured as following:
 * Basic Frontend: index.html
-    Technologies used: HTML/CSS; Plain JS; Vue.js; Ajax; jQuery
+    Technologies used: HTML/CSS; JS; Vue.js; Ajax; jQuery
 
     WYSIWYG Texteditor: CKEditor Basic
 
