@@ -9,42 +9,78 @@
   src: url('./BRLNSR.TTF');
 }
 
+.loginField{
+  margin-left: 30%;
+}
+
 header {
   /*background-image: url('./img/Background.jpg');*/
-  padding: 156px 0 100px;
+  padding: 156px 0 0px;
 }
 
-.usernameInput, .userEmailInput{
-  margin-left: 10%;
-  margin-top: 10px;
-}
 
-.userEmailInput{
-  width: 300px;
-}
-
-.inputDescription{
-  float: left; 
-  width: 75px;
-  margin-top: 10px;
-}
-
+/**/
 .inputField{
-  width: 100%;
-  margin-left: 0%;
+  width: 450px;
 }
-
+.inputTextarea{
+  width: 500px;
+}
 .userInput{
-  padding: 5px;
-  margin-bottom: 5px;
-  border-style: groove;
-  border-width: 1px;
+  overflow:hidden;
+  margin:10px;
+  min-height:10px;
 }
 
-.inputForm{
-  width: 100%;
-  margin-left: 20%;
-  margin-top: -20px;
+.inputDescription1{
+  float:left; 
+  margin-right:20px;
+  width:140px;
+  border-right:1px solid #000;
+}
+
+.inputFieldWrapper{
+  overflow: hidden;
+}
+
+@media (max-width: 1200px){
+  .inputField, .inputTextarea{
+    width: 400px;
+  }
+}
+
+@media screen and (max-width: 850px) {
+  .inputDescription1{ 
+   float: none;
+   margin-right:0;
+   width:auto;
+   border:0;
+   border-bottom:1px solid #000;    
+ }
+ .inputField, .inputTextarea{
+   width: 400px;
+ }
+}
+@media (max-width: 460px){
+  .inputField, .inputTextarea{
+    width: 250px;
+  }
+}
+/**/
+
+.LoginInputField{
+  width: 50%;
+  margin: 0 auto;
+}
+@media (max-width: 500px){
+  .LoginInputField{
+    width: 100%;
+  }
+}
+
+.LoginForm{
+  width: 50%;
+  margin: 0 auto;
 }
 
 .sendBtn{
@@ -56,11 +92,30 @@ header {
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
-  margin-left: 20%;
 }
-
 .sendBtn:hover{
   background-color: #BEBEBE;
+}
+
+.cancelBtn{
+  background-color: red;
+  border: none;
+  color: white;
+  padding: 10px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.cancelBtn:hover{
+  background-color: #990909;
+}
+
+body{
+  width: 100%;
 }
 
 @media (min-width: 850px){
@@ -75,11 +130,6 @@ header {
   }
 }
 
-
-
-/*.testclass{
-  background-image: url('./img/Background_4.jpg');
-}*/
 
 
 section {

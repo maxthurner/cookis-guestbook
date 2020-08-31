@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=0 shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' />
+  <link rel="icon" type="image/png" href="css/book-stack.png" sizes="512x512">
+  <title>THE GUESTBOOK</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom styles -->
+  <link href="css/customCSS.css" rel="stylesheet">
+  
+  <!-- Vue.js -->
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+  <!-- jQuery -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+  <!-- CKEditor -->
+  <script src="ckeditor/ckeditor.js"></script>
+
+  <script>
+    //Constants for Developing State --> replace when deploy!
+    const URLselectEntries = "/index/Guestbook/selectEntries.php";
+    const URLlike = "like.php";
+
+  </script>
+</head>
+
+
+<body id="page-top">
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+    <div class="container">
+      
+      <a class="navbar-brand js-scroll-trigger" href="#page-top" style="font-family: BerlinCustom;">GUESTBOOK</a>
+      <!-- Here the logout button could be added when Session is active and User logged in - but it's not necessary for example -->
+    </div>
+  </nav>
+
+  <header class="bg-primary">
+    <div class="container text-center">
+      <h1 style="color: black; font-family: BerlinCustom; font-size: 50px;">THE GUESTBOOK</h1>
+      <p class="lead" style="font-size: 25px;">Write something worth reading</p>
+      <p></p>
+    </div>
+  </header>
+
+  <section id="nav1">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 mx-auto">
+          <div class="headlineLine"></div>
+          <h2 class="headlineText" style="color: black">Entities</h2>
+          
+          <div id="Itemlist">
+            <table class="table">
+                <tr v-for="(item, index) in items">
+                    <!--<td>{{index}}</td>-->
+                    <td>{{item.username}}
+                        <div>{{item.timestamp.slice(0,11)}}</div>
+                    </td>
+                    <td>
+                      <span v-html="superscript(item.message)"></span>
+                      <!--{{item.message}}-->
+                    </td>
+                    <!-- Surely there is a more beautiful way to solve this but I don't have that much experience with Vue to think of a clean way 
+                         I hide the Comment ID and use this in JS to indentify the clicked button to the entity object.
+                         I would be interested in how to solve this cleanly, please lmk! -->
+                    
+                    <td style="padding: 12px 0 0 0;">
+                        <div id="likeBtn" onclick="like(this, 1)" style='font-size: larger; cursor: pointer;'>&#128077;<p style="display:none;">{{item.id}}</p></div>
+                    </td>
+                    <td style="padding: 2px;">
+                        <div style="font-weight: bold; margin-top: 35px;">{{item.likes}}</div>
+                    </td>
+                    <td style="padding: 12px 0 0 0;"> 
+                        <div id="dislikeBtn" onclick="like(this, 0)" style='font-size: larger; cursor: pointer;'>&#128078;<p style="display:none;">{{item.id}}</p></div>
+                    </td>
+                    
+                    
+                </tr>
+            </table>
+          </div>
+
+          <br><br><br>
+          <div>
+            <h3 style="color: black;">New Entry:</h3>
+          </div>
+          <div class="inputFieldWrapper">
+            <form name="formUserInput" action="newEntry.php" onsubmit="return validateForm()" method="post">
+
+              <div class="inputDescription1">Username</div>
+              <div class="userInput">
+                <input id="fieldUsername" class="inputField" type="text" name="username"></input>
+              </div>
+
+              <div class="inputDescription1">Email</div>
+              <div class="userInput">
+                <input id="fieldEmail" class="inputField" type="email" name="email"></input>
+              </div>
+
+              <div class="inputDescription1">Message *</div>
+              <div class="userInput">
+                <textarea id="inputForm" class="inputTextarea"  placeholder="New Entry" name="message"></textarea>
+              </div>
+
+              <!-- Alert Message -->
+              <div id="noMessage" style="display: none; background-color: #ff3333; color: white; border: 1px solid black; border-radius: 10px; margin-bottom: 10px;">
+                <p style="text-align: center; margin-top: 10px;">Message length must be &gt;0 and &lt;512! (no faculty)</p>
+              </div>
+
+              <div class="inputDescription1" style="border:none;">&nbsp;</div>
+              <div class="userInput">
+                <button id="sendBtn" alt="Submit" class="sendBtn">Send</button>
+              </div>
+              
+              
+            </form>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-5 bg-dark">
+    <div class="container">
+        <p class="m-0 text-center"><a  href="admin.php">Backend login</a></p>
+        <p class="m-0 text-center text-white">Copyright &copy; Thurner</p>
+      
+    </div>
+  </footer>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Plugin JavaScript -->
+  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+</body>
+
+<script>
+  //Add CKEditor
+  CKEDITOR.replace('inputForm');
+
+
+  //Check Fields
+  function validateForm(){
+    //force update of Editor data to textarea
+    CKEDITOR.instances.inputForm.updateElement();
+    //var fieldUsername = document.forms["formUserInput"]["username"].value;
+    //var fieldEmail = document.forms["formUserInput"]["email"].value;
+    var fieldText = document.forms["formUserInput"]["message"].value;
+    var noMessage = document.getElementById("noMessage");
+    console.log(fieldText)
+  
+    if(fieldText == "" || fieldText.length > 512){
+        noMessage.style.display = "block";
+        return false;
+    }
+    return true;
+  }
+  
+  //Grab ID and pass Data to like.php   
+  function like(domObject, bool){
+    //bool == true -> LIKE
+    //bool == false -> DISLIKE
+    var id = domObject.innerHTML.slice(28); //ugly string manipulation
+    var x = id.length - 4;  //it gets uglier 
+    id = id.slice(0,x);     //finally over
+    
+    $.ajax({
+        type: "POST",
+        url: URLlike,
+        data: {id: id, like: bool},
+        success: function(success){
+            console.log("says it works");
+            console.log(success);
+            location.reload();
+        },
+        error: function(error){
+            console.log(error);
+        }
+    })
+    
+  }
+
+//Collect Data from selectEntries and provide it
+  var ItemsVue = new Vue({
+    el: '#Itemlist',
+    data: {
+        items: []
+    },
+    methods:{
+      superscript(input){
+        return input;
+      }
+    },
+    mounted: function () {
+        var self = this;
+        $.ajax({
+            url: URLselectEntries,
+            method: 'GET',
+            success: function (data) {
+                self.items = data;
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+    }
+  });
+</script>
+
+
+<!-- 
+Attributes:
+<p>Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a></p>
+
+
+
+
+
+-->
+
+</html>

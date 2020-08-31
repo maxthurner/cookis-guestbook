@@ -26,11 +26,12 @@
       // data of each row
       while($row = $result->fetch_assoc()) {
         //echo "<tr><td>".$row["id"]."</td><td>".$row["username"]." ".$row["email"]."</td></tr>";
-        $tempJson =   array('id' => $row["id"], 
+        $tempJson =   array('id' => (int)$row["id"], 
                             'username' => $row["username"],
                             'email' => $row["email"],
                             'message' => $row["userMessage"],
-                            'timestamp' => $row["timestamp"]);
+                            'timestamp' => $row["timestamp"],
+                            'likes' => (int)$row["likes"]);
 
         array_push($jsonArray, $tempJson);
         //array_push($jsonArray, $row["id"], $row["username"], $row["email"]);
