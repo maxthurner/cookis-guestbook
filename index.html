@@ -49,7 +49,7 @@
     
       <div id="particles-js" class="particles-js">
       </div>
-      <div class="container text-center" style="display: block;">
+      <div class="container text-center">
         <h1 class="zfix" style="font-family: BerlinCustom; font-size: 50px;">THE GUESTBOOK</h1>
         <p class="lead zfix" style="font-size: 25px; color: white;">Write something worth reading</p>
       </div> 
@@ -83,30 +83,8 @@
                             <div style="float:left; width: 25px; text-align: center; cursor: pointer; font-size: larger;" onclick="like(this, 1)">&#128077;<p style="display:none;">{{item.id}}</p></div>
                             <div style="float:left; width: 25px; text-align: center; margin-top: 4px;" >{{item.likes}}</div>
                             <div style="float:left; width: 25px; text-align: center; cursor: pointer; font-size: larger;" onclick="like(this, 0)">&#128078;<p style="display:none;">{{item.id}}</p></div>
-
-<!--
-                            <div id="likeBtn" onclick="like(this, 1)" 
-                            style='width: 25px; font-size: larger; cursor: pointer; text-align: right;'>&#128077;<p style="display:none;">{{item.id}}</p></div>
-                            <div 
-                            style="width: 25px; float:left;  font-weight: bold; margin-top: 35px; margin-right: -5px;">{{item.likes}}</div>
-                            <div id="dislikeBtn" onclick="like(this, 0)" 
-                            style='width: 25px; float:left; margin-left: 10px; font-size: larger; cursor: pointer; text-align: left;'>&#128078;<p style="display:none;">{{item.id}}</p></div>
-                          -->
                           </div>
-                        </td>
-                        
-                        <!--
-                        <td style="padding: 12px 0 0 0; width: 15px;">
-                            <div id="likeBtn" onclick="like(this, 1)" style='font-size: larger; cursor: pointer; text-align: right;'>&#128077;<p style="display:none;">{{item.id}}</p></div>
-                        </td>
-                        <td style="padding: 0px; margin: 0px;">
-                            <div style="font-weight: bold; margin-top: 35px; margin-right: -5px;">{{item.likes}}</div>
-                        </td>
-                        <td style="padding: 12px 0 0 0;width: 15px;"> 
-                            <div id="dislikeBtn" onclick="like(this, 0)" style='font-size: larger; cursor: pointer; text-align: left;'>&#128078;<p style="display:none;">{{item.id}}</p></div>
-                        </td>-->
-                        
-                        
+                        </td>                      
                     </tr>
                 </table>
               </div>
@@ -248,8 +226,6 @@
             }
         });
         var test = document.getElementById("tableID");
- 
-        
     }
   });
 </script>
