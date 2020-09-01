@@ -31,6 +31,8 @@ The overall architecture could be improved - but for cost-benefit factor and qui
     A NoSQL database would be prefered no handle just JSON data - however Xampp doesn't provide it and I didn't have a clean server to play around.
     
     Therefore selected data from the database was brought into JSON format after recieving it.
+    
+    SQL Injection tested and approved.
 
 *   Database Architecture:
     Table
