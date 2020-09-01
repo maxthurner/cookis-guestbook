@@ -41,7 +41,7 @@ The overall architecture could be improved - but for cost-benefit factor and qui
 
 * Improvements (Security) to do:
      - Split user and rights even more (Readonly user)
-     - outsource db user credentials --> At the moment you need to change the database informations directly in the files (like.php, newEntry, selectEntries, login.php, delete.php). On productive this would never be deployed like this!
+     - secure db user credentials --> At the moment you need to change the database informations directly in the file credentials.php
   
 
 > to Secure passwords a way would be to store the password in a .htaccess file in a not publicly accessible folder.
