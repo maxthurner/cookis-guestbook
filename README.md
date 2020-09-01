@@ -38,8 +38,8 @@ The overall architecture could be improved - but for cost-benefit factor and qui
     - user        includes    ID[Serial, PK], Username[varchar(255)], Password[varchar(255)]
 
 * Improvements (Security) to do:
-       - Split user and rights even more (Readonly user)
-       - outsource db user credentials --> At the moment you need to change the database informations directly in the files (like.php, newEntry, selectEntries, login.php, delete.php). On productive this would never be deployed like this!
+     - Split user and rights even more (Readonly user)
+     - outsource db user credentials --> At the moment you need to change the database informations directly in the files (like.php, newEntry, selectEntries, login.php, delete.php). On productive this would never be deployed like this!
 
         to Secure passwords a way would be to store the password in a .htaccess file in a not publicly accessible folder.
         or on an Apache Webserver in a httpd.conf or virtual hosts file.
