@@ -15,10 +15,9 @@ This project was developed by using Xampp as an local Webserver and Database hos
 
 The architecture is structured as following:
 * Basic Frontend: index.html
-    Technologies used: HTML/CSS; Plain JS; Vue.js; Ajax; jQuery
-
-    WYSIWYG Texteditor: CKEditor Basic
-    Header Gimmick: particles.js
+    - Technologies used: HTML/CSS; Plain JS; Vue.js; Ajax; jQuery
+    - WYSIWYG Texteditor: CKEditor Basic
+    - Header Gimmick: particles.js
 
 * Data Access Services: selectEntries.php , newEntry.php, delete.php, like.php
 
@@ -28,25 +27,25 @@ The overall architecture could be improved - but for cost-benefit factor and qui
 
 ## Database
 
-* Database:
-    For quick development a MySQL database was used, and data was split up to fit a relational form.
+*   For quick development a MySQL database was used, and data was split up to fit a relational form.
     A NoSQL database would be prefered no handle just JSON data - however Xampp doesn't provide it and I didn't have a clean server to play around.
     
     Therefore selected data from the database was brought into JSON format after recieving it.
 
-    Database Architecture:
-        Table   articles    includes    ID[Serial, PK], Username[varchar(64)], Email[varchar(64)], Message[text,!Null], Timestamp[timestamp, current_timestamp()], Likes[int]
-                user        includes    ID[Serial, PK], Username[varchar(255)], Password[varchar(255)]
+*   Database Architecture:
+    Table
+    - articles    includes    ID[Serial, PK], Username[varchar(64)], Email[varchar(64)], Message[text,!Null], Timestamp[timestamp, current_timestamp()], Likes[int]
+    - user        includes    ID[Serial, PK], Username[varchar(255)], Password[varchar(255)]
 
-    Improvements (Security) to do:
-        * Split user and rights even more (Readonly user)
-        * outsource db user credentials --> At the moment you need to change the database informations directly in the files (like.php, newEntry, selectEntries, login.php, delete.php). On productive this would never be deployed like this!
+* Improvements (Security) to do:
+       * Split user and rights even more (Readonly user)
+       * outsource db user credentials --> At the moment you need to change the database informations directly in the files (like.php, newEntry, selectEntries, login.php, delete.php). On productive this would never be deployed like this!
 
         to Secure passwords a way would be to store the password in a .htaccess file in a not publicly accessible folder.
         or on an Apache Webserver in a httpd.conf or virtual hosts file.
         Furthermore this File should be hidden by htaccess so nobody can directly view this file in browser.
 
-        Database Users: (local infos)
+        * Database Users: (local infos)
             - postmanDB: SELECT, INSERT, UPDATE
                 pwd: mucSqq1igiTcEID6
             - admin:    
