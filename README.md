@@ -18,14 +18,15 @@ The architecture is structured as following:
     Technologies used: HTML/CSS; Plain JS; Vue.js; Ajax; jQuery
 
     WYSIWYG Texteditor: CKEditor Basic
+    Header Gimmick: particles.js
 
 * Data Access Services: selectEntries.php , newEntry.php, delete.php, like.php
-    
 
 * Backend Access:   login.php, admin.php
     
+The overall architecture could be improved - but for cost-benefit factor and quick understanding this was sufficient.
 
-## Usage
+## Database
 
 * Database:
     For quick development a MySQL database was used, and data was split up to fit a relational form.
@@ -38,23 +39,28 @@ The architecture is structured as following:
                 user        includes    ID[Serial, PK], Username[varchar(255)], Password[varchar(255)]
 
     Improvements (Security) to do:
-        * Don't store plaintext database credentials
         * Split user and rights even more (Readonly user)
+        * outsource db user credentials --> At the moment you need to change the database informations directly in the files (like.php, newEntry, selectEntries, login.php, delete.php). On productive this would never be deployed like this!
 
-        Database Users:
+        to Secure passwords a way would be to store the password in a .htaccess file in a not publicly accessible folder.
+        or on an Apache Webserver in a httpd.conf or virtual hosts file.
+        Furthermore this File should be hidden by htaccess so nobody can directly view this file in browser.
+
+        Database Users: (local infos)
             - postmanDB: SELECT, INSERT, UPDATE
                 pwd: mucSqq1igiTcEID6
             - admin:    
                 pwd: EUDqKAf20uqOr4Sc
 
-
 ## Things to improve / Bugs
+* Bot secure
+    Add of a simple Captcha (reCAPTCHA) to prevent Bot posts on the page.
 
 * Page View List Objects
     if more than x posts are returned -> multipage view of comments, so it doesn't end in an endless scrolling party
-    --> How do you correctly access 
+    --> How do you correctly access Vue data objects rendered in list?
 
 * Non User authentication
     find if user (device/used browser) has already liked a post (simple cookie with IDs of liked posts)
 
-* Nr. of Likes --> Doesn't fit too large numbers -> 4 digits don't fit.
+* Nr. of Likes Div Stlying --> Doesn't fit too large numbers
